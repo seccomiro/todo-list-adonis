@@ -12,9 +12,15 @@ export default class TasksController {
     return view.render('tasks.show', { task })
   }
 
-  public async create({}: HttpContextContract) {}
+  public async create({ view }: HttpContextContract) {
+    return view.render('tasks.create')
+  }
 
-  public async store({}: HttpContextContract) {}
+  public async store({ request, response }: HttpContextContract) {
+    const data = request.only(['title'])
+    await Task.create(data)
+    response.redirect().toRoute('tasks.index')
+  }
 
   public async edit({}: HttpContextContract) {}
 

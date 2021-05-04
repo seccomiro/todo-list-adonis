@@ -2,6 +2,7 @@
 
 @section('content')
   <h1>Tasks</h1>
+  <a href="{{ route('tasks.create') }}">Nova Tarefa</a>
   <ul>
     @each(task in tasks)
       <li>
