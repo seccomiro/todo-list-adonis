@@ -22,5 +22,5 @@ import Route from '@ioc:Adonis/Core/Route'
 
 // Route.on('/').render('welcome')
 
-// Route.get('tasks', 'TasksController.index')
-Route.resource('tasks', 'TasksController')
+Route.get('tasks', 'TasksController.index')
+// Route.resource('tasks', 'TasksController')

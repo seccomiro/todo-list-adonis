@@ -1,8 +1,10 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Task from 'App/Models/Task'
 
 export default class TasksController {
-  public async index({}: HttpContextContract) {
-    return 'Hello Adonis!'
+  public async index({ view }: HttpContextContract) {
+    const tasks = await Task.all()
+    return view.render('tasks/index', { tasks })
   }
 
   public async create({}: HttpContextContract) {}
