@@ -4,7 +4,11 @@
   <h1>Tasks</h1>
   <ul>
     @each(task in tasks)
-      <li>{{ task.title }}</li>
+      <li>
+        <a href="{{ route('tasks.show', { id: task.id }) }}">
+          {{ task.title }}
+        </a>
+      </li>
     @endeach
   </ul>
 @endsection

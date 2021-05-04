@@ -6,4 +6,8 @@
     <p>{{ task.description }}</p>
   @endif
   <p>Feita: {{ task.done ? 'Sim' : 'Não' }}</p>
+
+  <div>
+    <a href="{{ route('tasks.index') }}">Voltar</a>
+  </div>
 @endsection
