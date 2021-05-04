@@ -24,3 +24,4 @@ import Route from '@ioc:Adonis/Core/Route'
 
 // Route.get('tasks', 'TasksController.index')
 Route.resource('tasks', 'TasksController')
+Route.get('/tasks/:id/done', 'TasksController.done').as('tasks.done');

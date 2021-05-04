@@ -22,6 +22,13 @@ export default class TasksController {
     response.redirect().toRoute('tasks.index')
   }
 
+  public async done({ params, response }: HttpContextContract) {
+    const task = await Task.findOrFail(params.id)
+    task.done = !task.done
+    task.save()
+    response.redirect().toRoute('tasks.index')
+  }
+
   public async edit({}: HttpContextContract) {}
 
   public async update({}: HttpContextContract) {}

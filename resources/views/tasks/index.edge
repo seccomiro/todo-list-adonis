@@ -7,7 +7,14 @@
     @each(task in tasks)
       <li>
         <a href="{{ route('tasks.show', { id: task.id }) }}">
-          {{ task.title }}
+          @if(task.done)
+            <del>{{ task.title }}</del>
+          @else
+            {{ task.title }}
+          @endif
+        </a>
+        <a href="{{ route('tasks.done', { id: task.id }) }}">
+          [X]
         </a>
       </li>
     @endeach
