@@ -4,16 +4,16 @@ import Task from 'App/Models/Task'
 export default class TasksController {
   public async index({ view }: HttpContextContract) {
     const tasks = await Task.all()
-    return view.render('tasks.index', { tasks })
+    return view.render('tasks/index', { tasks })
   }
 
   public async show({ params, view }: HttpContextContract) {
     const task = await Task.find(params.id)
-    return view.render('tasks.show', { task })
+    return view.render('tasks/show', { task })
   }
 
   public async create({ view }: HttpContextContract) {
-    return view.render('tasks.create')
+    return view.render('tasks/create')
   }
 
   public async store({ request, response }: HttpContextContract) {
@@ -29,9 +29,22 @@ export default class TasksController {
     response.redirect().toRoute('tasks.index')
   }
 
-  public async edit({}: HttpContextContract) {}
+  public async edit({ params, view }: HttpContextContract) {
+    const task = await Task.find(params.id)
+    return view.render('tasks/edit', { task })
+  }
 
-  public async update({}: HttpContextContract) {}
+  public async update({ params, request, response }: HttpContextContract) {
+    const task = await Task.findOrFail(params.id)
+    const data = request.only(['title', 'description'])
+    task.merge(data)
+    task.save()
+    response.redirect().toRoute('tasks.index')
+  }
 
-  public async destroy({}: HttpContextContract) {}
+  public async destroy({ params, response }: HttpContextContract) {
+    const task = await Task.findOrFail(params.id)
+    task.delete()
+    response.redirect().toRoute('tasks.index')
+  }
 }

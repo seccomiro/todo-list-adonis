@@ -1,4 +1,4 @@
-@layout('layout.app')
+@layout('layout/app')
 
 @section('content')
   <h1>Tasks</h1>
@@ -13,9 +13,16 @@
             {{ task.title }}
           @endif
         </a>
-        <a href="{{ route('tasks.done', { id: task.id }) }}">
-          [X]
-        </a>
+        <a href="{{ route('tasks.done', { id: task.id }) }}">[X]</a>
+        <a href="{{ route('tasks.edit', { id: task.id }) }}">Editar</a>
+        <form
+          style="display: inline;"
+          method="post"
+          action="{{
+            route('tasks.destroy', { id: task.id, qs: { _method: 'DELETE' } })
+          }}">
+            <button type="submit">Apagar</button>
+        </form>
       </li>
     @endeach
   </ul>
